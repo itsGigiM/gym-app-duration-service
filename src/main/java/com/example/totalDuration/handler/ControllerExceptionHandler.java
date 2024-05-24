@@ -1,5 +1,6 @@
 package com.example.totalDuration.handler;
 
+import feign.FeignException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,5 @@ public class ControllerExceptionHandler {
         log.error("Date you inputted is invalid");
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-
 
 }
