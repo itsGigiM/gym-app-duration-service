@@ -18,10 +18,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,6 +51,26 @@ public class ServiceTests {
         service.updateWorkHours(updateDTO);
 
         assertEquals(10L, summary.getMayDuration());
+    }
+
+    @Test
+    public void testRetrieveWorkHours() {
+        String username = "testUser";
+        TrainerSummary trainerSummary = new TrainerSummary();
+        when(mockTrainerRepo.findByUserName(username)).thenReturn(trainerSummary);
+
+        List<YearlyTrainingSummary> yearlyTrainingSummaries = new ArrayList<>();
+        YearlyTrainingSummary summary1 = new YearlyTrainingSummary();
+        summary1.setTrainingYear(2020);
+        yearlyTrainingSummaries.add(summary1);
+        when(mockSummaryRepo.findByTrainerSummaryUserName(username)).thenReturn(yearlyTrainingSummaries);
+
+        Map<Integer, YearlyTrainingSummary> result = service.retrieveWorkHours(username);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertTrue(result.containsKey(2020));
+        assertEquals(summary1, result.get(2020));
     }
 
 }

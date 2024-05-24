@@ -1,7 +1,6 @@
 package com.example.totalDuration.service;
 
 import com.example.totalDuration.dto.TrainerSessionWorkHoursUpdateDTO;
-import com.example.totalDuration.dto.WorkHoursRetrieveDTO;
 import com.example.totalDuration.model.TrainerSummary;
 import com.example.totalDuration.model.YearlyTrainingSummary;
 import com.example.totalDuration.repository.TrainerRepository;
