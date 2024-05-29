@@ -22,7 +22,7 @@ import com.example.totalDuration.service.WorkHoursService;
 import com.example.totalDuration.controller.WorkHoursControllerImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class ControllerTests {
+public class WorkHoursControllerTests {
 
     @Mock
     private WorkHoursService service;

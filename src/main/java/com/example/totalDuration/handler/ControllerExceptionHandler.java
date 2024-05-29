@@ -1,5 +1,6 @@
 package com.example.totalDuration.handler;
 
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,13 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public ResponseEntity<HttpStatus> handleIllegalArgumentException(IllegalArgumentException ex) {
         log.error("Date you inputted is invalid");
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MalformedJwtException.class)
+    @ResponseBody
+    public ResponseEntity<HttpStatus> handleMalformedJwtException() {
+        log.error("Invalid JWT");
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

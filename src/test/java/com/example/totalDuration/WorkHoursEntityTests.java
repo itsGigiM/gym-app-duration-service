@@ -5,11 +5,9 @@ import com.example.totalDuration.model.YearlyTrainingSummary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-public class EntityTests {
+public class WorkHoursEntityTests {
 
     private YearlyTrainingSummary yearlyTrainingSummary;
     private final TrainerSummary trainerSummary = new TrainerSummary();
