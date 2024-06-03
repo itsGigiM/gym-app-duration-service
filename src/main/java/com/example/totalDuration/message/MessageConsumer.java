@@ -6,20 +6,24 @@ import com.example.totalDuration.utils.TokenValidator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 @Slf4j
 public class MessageConsumer {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final WorkHoursService service;
+    private WorkHoursService service;
 
-    private final TokenValidator tokenValidator;
+    private TokenValidator tokenValidator;
 
+    @Autowired
     public MessageConsumer(WorkHoursService service, TokenValidator tokenValidator) {
         this.service = service;
         this.tokenValidator = tokenValidator;
