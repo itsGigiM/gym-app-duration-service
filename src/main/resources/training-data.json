@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "1",
+    "trainingYear": 2017,
+    "januaryDuration": 10,
+    "februaryDuration": 18,
+    "marchDuration": 10,
+    "aprilDuration": 4,
+    "mayDuration": 0,
+    "juneDuration": 15,
+    "julyDuration": 9,
+    "augustDuration": 7,
+    "septemberDuration": 7,
+    "octoberDuration": 12,
+    "novemberDuration": 19,
+    "decemberDuration": 14
+  },
+  {
+    "_id": "2",
+    "trainingYear": 2018,
+    "januaryDuration": 0,
+    "februaryDuration": 1,
+    "marchDuration": 10,
+    "aprilDuration": 10,
+    "mayDuration": 10,
+    "juneDuration": 0,
+    "julyDuration": 2,
+    "augustDuration": 15,
+    "septemberDuration": 3,
+    "octoberDuration": 14,
+    "novemberDuration": 4,
+    "decemberDuration": 2
+  },
+  {
+    "_id": "3",
+    "trainingYear": 2023,
+    "januaryDuration": 8,
+    "februaryDuration": 14,
+    "marchDuration": 18,
+    "aprilDuration": 17,
+    "mayDuration": 15,
+    "juneDuration": 18,
+    "julyDuration": 2,
+    "augustDuration": 12,
+    "septemberDuration": 17,
+    "octoberDuration": 13,
+    "novemberDuration": 3,
+    "decemberDuration": 15
+  }
+]

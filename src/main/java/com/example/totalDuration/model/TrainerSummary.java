@@ -1,44 +1,41 @@
 package com.example.totalDuration.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class TrainerSummary{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
+    private String userId;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
     private String userName;
 
-    @Column(nullable = false)
+    @JsonProperty("isActive")
     private boolean isActive;
 
-    @OneToMany(mappedBy = "trainerSummary", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @DocumentReference
     private List<YearlyTrainingSummary> yearlyTrainingSummaries;
 
-    public TrainerSummary(String firstName, String lastName, String userName, boolean isActive) {
+    public TrainerSummary(String firstName, String lastName, String userName, boolean isActive,
+                          List<YearlyTrainingSummary> yearlyTrainingSummaries) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.isActive = isActive;
+        this.yearlyTrainingSummaries = yearlyTrainingSummaries;
     }
 }
