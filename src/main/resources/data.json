@@ -1,0 +1,82 @@
+[
+  {
+    "userName": "admin",
+    "firstName": "admin",
+    "lastName": "admin",
+    "isActive": true,
+    "yearlyTrainingSummaries": [
+      {
+        "_id": "summary001",
+        "trainingYear": 2021,
+        "januaryDuration": 100,
+        "februaryDuration": 110,
+        "marchDuration": 120,
+        "aprilDuration": 130,
+        "mayDuration": 140,
+        "juneDuration": 150,
+        "julyDuration": 160,
+        "augustDuration": 170,
+        "septemberDuration": 180,
+        "octoberDuration": 190,
+        "novemberDuration": 200,
+        "decemberDuration": 210
+      },
+      {
+        "_id": "summary002",
+        "trainingYear": 2022,
+        "januaryDuration": 105,
+        "februaryDuration": 115,
+        "marchDuration": 125,
+        "aprilDuration": 135,
+        "mayDuration": 145,
+        "juneDuration": 155,
+        "julyDuration": 165,
+        "augustDuration": 175,
+        "septemberDuration": 185,
+        "octoberDuration": 195,
+        "novemberDuration": 205,
+        "decemberDuration": 215
+      }
+    ]
+  },
+  {
+    "userName": "john.doe",
+    "firstName": "john",
+    "lastName": "doe",
+    "isActive": true,
+    "yearlyTrainingSummaries": [
+      {
+        "_id": "summary003",
+        "trainingYear": 2021,
+        "januaryDuration": 100,
+        "februaryDuration": 110,
+        "marchDuration": 120,
+        "aprilDuration": 130,
+        "mayDuration": 140,
+        "juneDuration": 150,
+        "julyDuration": 160,
+        "augustDuration": 170,
+        "septemberDuration": 180,
+        "octoberDuration": 190,
+        "novemberDuration": 200,
+        "decemberDuration": 210
+      },
+      {
+        "_id": "summary004",
+        "trainingYear": 2022,
+        "januaryDuration": 105,
+        "februaryDuration": 115,
+        "marchDuration": 125,
+        "aprilDuration": 135,
+        "mayDuration": 145,
+        "juneDuration": 155,
+        "julyDuration": 165,
+        "augustDuration": 175,
+        "septemberDuration": 185,
+        "octoberDuration": 195,
+        "novemberDuration": 205,
+        "decemberDuration": 215
+      }
+    ]
+  }
+]

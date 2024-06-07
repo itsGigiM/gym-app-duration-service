@@ -1,19 +1,17 @@
 package com.example.totalDuration.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
-@Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class YearlyTrainingSummary {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @JsonProperty("_id")
+    private String id;
 
     private Integer trainingYear;
     private Long januaryDuration;
@@ -29,17 +27,11 @@ public class YearlyTrainingSummary {
     private Long novemberDuration;
     private Long decemberDuration;
 
-    @ManyToOne
-    @JoinColumn(name = "trainer_user_id", nullable = false)
-    @JsonBackReference
-    private TrainerSummary trainerSummary;
-
     public YearlyTrainingSummary(Integer trainingYear, Long januaryDuration, Long februaryDuration,
                                  Long marchDuration, Long aprilDuration, Long mayDuration,
                                  Long juneDuration, Long julyDuration, Long augustDuration,
                                  Long septemberDuration, Long octoberDuration,
-                                 Long novemberDuration, Long decemberDuration,
-                                 TrainerSummary trainer) {
+                                 Long novemberDuration, Long decemberDuration) {
         this.trainingYear = trainingYear;
         this.januaryDuration = januaryDuration;
         this.februaryDuration = februaryDuration;
@@ -53,6 +45,5 @@ public class YearlyTrainingSummary {
         this.octoberDuration = octoberDuration;
         this.novemberDuration = novemberDuration;
         this.decemberDuration = decemberDuration;
-        this.trainerSummary = trainer;
     }
 }

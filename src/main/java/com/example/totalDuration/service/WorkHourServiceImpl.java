@@ -4,14 +4,14 @@ import com.example.totalDuration.dto.TrainerSessionWorkHoursUpdateDTO;
 import com.example.totalDuration.model.TrainerSummary;
 import com.example.totalDuration.model.YearlyTrainingSummary;
 import com.example.totalDuration.repository.TrainerRepository;
-import com.example.totalDuration.repository.YearlySummaryRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.example.totalDuration.repository.YearlyTrainingRepository;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +20,12 @@ import java.util.Map;
 @Slf4j
 @NoArgsConstructor
 public class WorkHourServiceImpl implements WorkHoursService{
-    YearlySummaryRepository repository;
     TrainerRepository trainerRepository;
+    YearlyTrainingRepository yearlyRepository;
 
     @Autowired
-    public WorkHourServiceImpl(YearlySummaryRepository repository, TrainerRepository trainerRepo) {
-        this.repository = repository;
+    public WorkHourServiceImpl(TrainerRepository trainerRepo, YearlyTrainingRepository yearlyRepository) {
+        this.yearlyRepository = yearlyRepository;
         this.trainerRepository = trainerRepo;
     }
 
@@ -41,21 +41,11 @@ public class WorkHourServiceImpl implements WorkHoursService{
 
         if (trainer == null) {
             log.info("Trainer is being processed first time in the database");
-            trainer = new TrainerSummary(updateDTO.getFirstName(), updateDTO.getLastName(), username, updateDTO.getIsActive());
-            trainerRepository.save(trainer);
+            trainer = new TrainerSummary(updateDTO.getFirstName(), updateDTO.getLastName(), username,
+                    updateDTO.getIsActive(), new ArrayList<>());
         }
 
-        TrainerSummary finalTrainer = trainer;
-        YearlyTrainingSummary summary = repository.findByTrainerSummaryUserNameAndTrainingYear(
-                updateDTO.getTrainerUsername(), yr).orElseGet(() -> {
-            YearlyTrainingSummary newSummary = new YearlyTrainingSummary(
-            yr, 0L, 0L, 0L, 0L, 0L,
-                    0L, 0L, 0L, 0L, 0L,
-                    0L, 0L, finalTrainer
-            );
-            repository.save(newSummary);
-            return newSummary;
-        });;
+        YearlyTrainingSummary summary = getYearlyTrainingSummary(trainer, yr);
 
         switch (mth) {
             case 1:
@@ -97,9 +87,33 @@ public class WorkHourServiceImpl implements WorkHoursService{
             default:
                 throw new IllegalArgumentException("Invalid month: " + mth);
         }
-        repository.save(summary);
+        yearlyRepository.save(summary);
+        trainerRepository.save(trainer);
         log.info("Updated trainers work hours");
 
+    }
+
+    private YearlyTrainingSummary getYearlyTrainingSummary(TrainerSummary trainer, int yr) {
+        YearlyTrainingSummary summary = null;
+
+        List<YearlyTrainingSummary> summaries = trainer.getYearlyTrainingSummaries();
+
+        for(YearlyTrainingSummary tempSummary : summaries){
+            if(tempSummary.getTrainingYear() == yr){
+                summary = tempSummary;
+                break;
+            }
+        }
+
+        if(summary == null){
+            summary = new YearlyTrainingSummary(
+                    yr, 0L, 0L, 0L, 0L, 0L,
+                    0L, 0L, 0L, 0L, 0L,
+                    0L, 0L
+            );
+            trainer.getYearlyTrainingSummaries().add(summary);
+        }
+        return summary;
     }
 
     @Override
@@ -107,12 +121,12 @@ public class WorkHourServiceImpl implements WorkHoursService{
         TrainerSummary trainer = trainerRepository.findByUserName(username);
         if (trainer != null) {
             Map<Integer, YearlyTrainingSummary> map = new HashMap<>();
-            List<YearlyTrainingSummary> list = repository.findByTrainerSummaryUserName(username);
+            List<YearlyTrainingSummary> list = trainer.getYearlyTrainingSummaries();
             for(YearlyTrainingSummary summary : list){
                 map.put(summary.getTrainingYear(), summary);
             }
             return map;
         }
-        throw new EntityNotFoundException("Trainer with username " + username + " not found.");
+        throw new RuntimeException("Trainer with username " + username + " not found.");
     }
 }
