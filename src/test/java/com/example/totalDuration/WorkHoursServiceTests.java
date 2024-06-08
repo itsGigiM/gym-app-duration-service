@@ -5,6 +5,7 @@ import com.example.totalDuration.dto.TrainerSessionWorkHoursUpdateDTO;
 import com.example.totalDuration.model.TrainerSummary;
 import com.example.totalDuration.model.YearlyTrainingSummary;
 import com.example.totalDuration.repository.TrainerRepository;
+import com.example.totalDuration.repository.YearlyTrainingRepository;
 import com.example.totalDuration.service.WorkHourServiceImpl;
 import com.example.totalDuration.service.WorkHoursService;
 
@@ -27,11 +28,14 @@ public class WorkHoursServiceTests {
     @Mock
     private TrainerRepository mockTrainerRepo;
 
+    @Mock
+    private YearlyTrainingRepository yearlyTrainingRepository;
+
     private WorkHoursService service;
 
     @BeforeEach
     public void setUp() {
-        service = new WorkHourServiceImpl(mockTrainerRepo);
+        service = new WorkHourServiceImpl(mockTrainerRepo, yearlyTrainingRepository);
     }
 
     @Test
