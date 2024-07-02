@@ -89,7 +89,7 @@ public class WorkHourServiceImpl implements WorkHoursService{
         }
         yearlyRepository.save(summary);
         trainerRepository.save(trainer);
-        log.info("Updated trainers work hours");
+        log.info("Updated trainers work hours {}", updateDTO);
 
     }
 
