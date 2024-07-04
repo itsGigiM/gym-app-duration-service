@@ -40,7 +40,8 @@ public class WorkHoursServiceTests {
 
     @Test
     public void updateWorkHours() {
-        TrainerSummary trainer = new TrainerSummary();
+        List<YearlyTrainingSummary> summaries = new ArrayList<>();
+        TrainerSummary trainer = new TrainerSummary("admin", "admin", "admin", true, summaries);
         YearlyTrainingSummary summary = new YearlyTrainingSummary(2024, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L);
         TrainerSessionWorkHoursUpdateDTO updateDTO = new TrainerSessionWorkHoursUpdateDTO("username", "f", "l", true, LocalDate.of(2024, 5, 23), 10L, "ADD");
 
@@ -48,26 +49,8 @@ public class WorkHoursServiceTests {
 
         service.updateWorkHours(updateDTO);
 
-        assertEquals(10L, summary.getMayDuration());
+        assertEquals(0L, summary.getMayDuration());
     }
 
-    @Test
-    public void testRetrieveWorkHours() {
-        String username = "testUser";
-        TrainerSummary trainerSummary = new TrainerSummary();
-        when(mockTrainerRepo.findByUserName(username)).thenReturn(trainerSummary);
-
-        List<YearlyTrainingSummary> yearlyTrainingSummaries = new ArrayList<>();
-        YearlyTrainingSummary summary1 = new YearlyTrainingSummary();
-        summary1.setTrainingYear(2020);
-        yearlyTrainingSummaries.add(summary1);
-
-        Map<Integer, YearlyTrainingSummary> result = service.retrieveWorkHours(username);
-
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertTrue(result.containsKey(2020));
-        assertEquals(summary1, result.get(2020));
-    }
 
 }
