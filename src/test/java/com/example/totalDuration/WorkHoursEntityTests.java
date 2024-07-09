@@ -17,8 +17,7 @@ public class WorkHoursEntityTests {
         yearlyTrainingSummary = new YearlyTrainingSummary(
                 2023,
                 10L, 20L, 30L, 40L, 50L, 60L,
-                70L, 80L, 90L, 100L, 110L, 120L,
-                trainerSummary
+                70L, 80L, 90L, 100L, 110L, 120L
         );
     }
 
@@ -37,7 +36,6 @@ public class WorkHoursEntityTests {
         assertEquals(100L, yearlyTrainingSummary.getOctoberDuration());
         assertEquals(110L, yearlyTrainingSummary.getNovemberDuration());
         assertEquals(120L, yearlyTrainingSummary.getDecemberDuration());
-        assertEquals(trainerSummary, yearlyTrainingSummary.getTrainerSummary());
     }
 
     @Test

@@ -1,10 +1,13 @@
 package com.example.totalDuration.repository;
 
 import com.example.totalDuration.model.TrainerSummary;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface TrainerRepository extends CrudRepository<TrainerSummary, Long> {
+@CompoundIndexes({
+        @CompoundIndex(name = "firstName_lastName_index", def = "{'firstName': 1, 'lastName': 1}")
+})
+public interface TrainerRepository extends MongoRepository<TrainerSummary, String> {
     TrainerSummary findByUserName(String userName);
 }
